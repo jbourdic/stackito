@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Pane from './Components/Pane';
+import Pane from './Components/Pane/Pane';
 
 class Tab extends Component {
     displayName = 'Tabs';
-
+/*
     constructor() {
         super();
 
@@ -12,27 +12,20 @@ class Tab extends Component {
         };
 
         this.handleClick = this.handleClick.bind(this)
-    }
+    }*/
 
     shouldComponentUpdate(nextProps, nextState) {
         return this.props !== nextProps || this.state !== nextState;
     };
 
-    handleClick() {
-        // event.preventDefault();
-        this.setState({
-            selected: this.state.selected
-        });
-    };
-
     _renderTitle() {
-        let activeClass = (this.state.selected === this.key ? 'active' : '');
+        let activeClass = (this.props.tab.selected ? 'active' : '');
 
         return (
             <a href="#"
                className={activeClass}
-               onClick={this.handleClick}>
-                {this.props.tab.title}
+               onClick={this.props.handleClick}>
+                {this.props.tab.config.title}
             </a>
         );
     };

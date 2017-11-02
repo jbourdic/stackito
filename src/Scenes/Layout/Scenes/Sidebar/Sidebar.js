@@ -2,32 +2,50 @@ import React, {Component} from 'react';
 import Tab from './Components/Tabs/Tab';
 
 class Sidebar extends Component {
-    constructor() {
-        super();
-        this.state = {
-            selected: 0
+
+
+
+    constructor(props) {
+        super(props);
+        const tabs = [];
+
+        for (var tab of this.props.tabs) {
+            tabs.push({'selected': 0, 'config': tab});
         }
+
+        this.state = {
+            tabs: tabs,
+            selected: 0
+        };
     }
 
-    _renderTabs(index, tab) {
+    renderTabs(index, tab) {
         return (
             <li key={index} >
-                <Tab tab={tab}/>
+                <Tab tab={this.state.tabs[index]} handleClick={() => this.handleTabClick(index)}/>
             </li>
         )
     };
 
-    handleClick() {
+    handleTabClick(index) {
+        const tabs = this.state.tabs.slice();
+
+        for (var tab of tabs) {
+            tab.selected = false;
+        }
+
+        tabs[index]['selected'] = true;
+
         this.setState({
-            selected: 0
+            tabs: tabs
         })
     };
 
     render() {
         let tabs = [];
 
-        for (var i = 0; i < this.props.tabs.length; i++) {
-            tabs.push(this._renderTabs(i, this.props.tabs[i]));
+        for (var i = 0; i < this.state.tabs.length; i++) {
+            tabs.push(this.renderTabs(i, this.state.tabs[i]));
         }
 
         return (

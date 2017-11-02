@@ -24,6 +24,13 @@ class Layout extends Component {
             'content': 'STARTERRE',
 
         },
+        {
+            'title': 'youtube',
+            'type': 'webview',
+            'url': 'https://youtube.com',
+            'content': 'Youtube',
+
+        },
     ];
 
     render() {
